@@ -7,3 +7,8 @@
 /english/obj
 /cef_binary_3.3578.1863.gbf8cff2_windows32_client
 /cef_binary_3.3578.1863.gbf8cff2_windows32_client.tar
+/build/cache
+build/English.exe.config
+build/English.pdb
+build/English.vshost.exe
+build/english.vshost.exe.config

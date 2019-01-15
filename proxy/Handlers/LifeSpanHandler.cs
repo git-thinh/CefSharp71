@@ -26,7 +26,8 @@ namespace CefSharp.WinForms.Example.Handlers
 
             chromiumWebBrowser.Invoke(new Action(() =>
             {
-                if (chromiumWebBrowser.FindForm() is BrowserForm owner)
+                var owner = chromiumWebBrowser.FindForm();
+                if (owner is BrowserForm)
                 {
                     var control = new Control
                     {
@@ -34,7 +35,7 @@ namespace CefSharp.WinForms.Example.Handlers
                     };
                     control.CreateControl();
 
-                    owner.AddTab(control, targetUrl);
+                    ((BrowserForm)owner).AddTab(control, targetUrl);
 
                     var rect = control.ClientRectangle;
 
@@ -86,9 +87,10 @@ namespace CefSharp.WinForms.Example.Handlers
             {
                 chromiumWebBrowser.Invoke(new Action(() =>
                 {
-                    if (chromiumWebBrowser.FindForm() is BrowserForm owner)
+                    var owner = chromiumWebBrowser.FindForm();
+                    if (owner is BrowserForm)
                     {
-                        owner.RemoveTab(windowHandle);
+                        ((BrowserForm)owner).RemoveTab(windowHandle);
                     }
                 }));
             }
@@ -103,7 +105,8 @@ namespace CefSharp.WinForms.Example.Handlers
         {
             if (!browser.IsDisposed && browser.IsPopup)
             {
-                if (popupasChildHelpers.TryGetValue(browser.Identifier, out PopupAsChildHelper interceptor))
+                PopupAsChildHelper interceptor = null;
+                if (popupasChildHelpers.TryGetValue(browser.Identifier, out interceptor))
                 {
                     popupasChildHelpers[browser.Identifier] = null;
                     interceptor.Dispose();

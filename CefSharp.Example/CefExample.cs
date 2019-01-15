@@ -8,6 +8,7 @@ using System.Text;
 using CefSharp.Example.Properties;
 using CefSharp.Example.Proxy;
 using CefSharp.SchemeHandler;
+using System.Linq;
 
 namespace CefSharp.Example
 {
@@ -15,8 +16,10 @@ namespace CefSharp.Example
     {
         //public const string BaseUrl = "custom://cefsharp";
         //public const string DefaultUrl = BaseUrl + "/home.html";
-        public const string BaseUrl = "http://localhost:321";
-        public const string DefaultUrl = "http://localhost:321/spaHome.html";
+        //public const string BaseUrl = "http://localhost:321";
+        //public const string DefaultUrl = "http://localhost:321/spaHome.html";
+        public const string BaseUrl = "https://google.com.vn";
+        public const string DefaultUrl = "about:blank";
 
 
         public const string BindingTestUrl = BaseUrl + "/BindingTest.html";
@@ -127,21 +130,21 @@ namespace CefSharp.Example
             switch (proxy.AccessType)
             {
                 case InternetOpenType.Direct:
-                {
-                    //Don't use a proxy server, always make direct connections.
-                    settings.CefCommandLineArgs.Add("no-proxy-server", "1");
-                    break;
-                }
+                    {
+                        //Don't use a proxy server, always make direct connections.
+                        settings.CefCommandLineArgs.Add("no-proxy-server", "1");
+                        break;
+                    }
                 case InternetOpenType.Proxy:
-                {
-                    settings.CefCommandLineArgs.Add("proxy-server", proxy.ProxyAddress);
-                    break;
-                }
+                    {
+                        settings.CefCommandLineArgs.Add("proxy-server", proxy.ProxyAddress);
+                        break;
+                    }
                 case InternetOpenType.PreConfig:
-                {
-                    settings.CefCommandLineArgs.Add("proxy-auto-detect", "1");
-                    break;
-                }
+                    {
+                        settings.CefCommandLineArgs.Add("proxy-auto-detect", "1");
+                        break;
+                    }
             }
 
             //settings.LogSeverity = LogSeverity.Verbose;
@@ -208,11 +211,21 @@ namespace CefSharp.Example
             //see https://github.com/cefsharp/CefSharp/wiki/General-Usage#proxy-resolution
             //CefSharpSettings.Proxy = new ProxyOptions(ip: "127.0.0.1", port: "8080", username: "cefsharp", password: "123");
 
-            if (!Cef.Initialize(settings, performDependencyCheck: !DebuggingSubProcess, browserProcessHandler: browserProcessHandler))
+            //////if (!Cef.Initialize(settings, performDependencyCheck: !DebuggingSubProcess, browserProcessHandler: browserProcessHandler))
+            //////{
+            //////    throw new Exception("Unable to Initialize Cef");
+            //////}
+            if (!Cef.Initialize(settings))
             {
-                throw new Exception("Unable to Initialize Cef");
+                if (Environment.GetCommandLineArgs().Contains("--type=renderer"))
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    return;
+                }
             }
-
             ////Cef.AddCrossOriginWhitelistEntry(BaseUrl, "https", "cefsharp.com", false);
         }
 

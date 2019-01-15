@@ -2,3 +2,4 @@
 /.vs
 /CefSharp.Example/bin
 /CefSharp.Example/obj
+/proxy/obj

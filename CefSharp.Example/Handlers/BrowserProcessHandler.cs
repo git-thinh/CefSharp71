@@ -15,7 +15,8 @@ namespace CefSharp.Example.Handlers
         /// The maximum number of milliseconds we're willing to wait between calls to OnScheduleMessagePumpWork().
         /// </summary>
         protected const int MaxTimerDelay = 1000 / 30;  // 30fps
-        const string _URL = "http://localhost:321/spaHome.html";
+        //const string _URL = "http://localhost:321/spaHome.html";
+        const string _URL = "about:blank";
 
 
         void IBrowserProcessHandler.OnContextInitialized()

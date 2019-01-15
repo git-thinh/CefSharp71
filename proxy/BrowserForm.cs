@@ -37,7 +37,8 @@ namespace CefSharp.WinForms.Example
 
             this.Width = 1049;
             this.Height = 669;
-            this.Shown += (se, ev) => {
+            this.Shown += (se, ev) =>
+            {
                 this.Top = 0;
                 this.Left = 0;
             };
@@ -80,7 +81,7 @@ namespace CefSharp.WinForms.Example
             {
                 Dock = DockStyle.Fill,
             };
-            
+
 
             var tabPage = new TabPage(url)
             {
@@ -128,16 +129,21 @@ namespace CefSharp.WinForms.Example
             var parentControl = FromChildHandle(windowHandle);
             if (!parentControl.IsDisposed)
             {
-                if (parentControl.Parent is TabPage tabPage)
+                var tabPage = parentControl.Parent;
+                if (tabPage is TabPage)
                 {
-                    browserTabControl.TabPages.Remove(tabPage);
+                    browserTabControl.TabPages.Remove((TabPage)tabPage);
                 }
-                else if (parentControl.Parent is Panel panel)
+                else
                 {
-                    var browserTabUserControl = (BrowserTabUserControl)panel.Parent;
+                    var panel = parentControl.Parent;
+                    if (panel is Panel)
+                    {
+                        var browserTabUserControl = (BrowserTabUserControl)panel.Parent;
 
-                    var tab = (TabPage)browserTabUserControl.Parent;
-                    browserTabControl.TabPages.Remove(tab);
+                        var tab = (TabPage)browserTabUserControl.Parent;
+                        browserTabControl.TabPages.Remove(tab);
+                    }
                 }
             }
         }

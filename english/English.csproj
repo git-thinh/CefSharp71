@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="frmBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InternetConnectivity.cs" />
     <Compile Include="MainContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

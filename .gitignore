@@ -13,3 +13,4 @@ build/English.pdb
 build/English.vshost.exe
 build/english.vshost.exe.config
 build/debug.log
+/build/debug.log

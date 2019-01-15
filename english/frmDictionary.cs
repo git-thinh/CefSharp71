@@ -7,11 +7,13 @@ using System.Windows.Forms;
 
 namespace English
 {
-    public class frmBrowser: Form
+    public class frmDictionary : Form
     {
-        public frmBrowser()
+        public frmDictionary()
         {
-            this.Text = "Browser";
+            this.Text = "Dictionary";
         }
+
+
     }
 }

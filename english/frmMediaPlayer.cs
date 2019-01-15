@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace English
 {
-    public class frmBrowser: Form
+    public class frmMediaPlayer : Form
     {
-        public frmBrowser()
+        public frmMediaPlayer()
         {
-            this.Text = "Browser";
+            this.Text = "Player";
         }
     }
 }

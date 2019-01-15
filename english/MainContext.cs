@@ -15,13 +15,17 @@ namespace English
         #region [ Crucial Variables ]
 
         //For the task tray icon.
-        NotifyIcon main_icon = new NotifyIcon();
+        NotifyIcon _mainIcon = new NotifyIcon();
         
         //Check if it's time to update.
-        Timer tm_refresh = new Timer() { Interval = 1000 * 60 };        
-        bool connectivity_issues = false;
-        int conn_test_counter = 0;
-        
+        Timer _timerRefresh = new Timer() { Interval = 1000 * 60 };        
+        bool _connectivityIssues = false;
+        int _connectCheckCounter = 0;
+
+        readonly frmBrowser _browser;
+        readonly frmDictionary _dictionary;
+        readonly frmMediaPlayer _player;
+
         #endregion
 
         /// <summary>
@@ -31,35 +35,50 @@ namespace English
         {
             setupIcon();
 
-            frmBrowser frm = new frmBrowser();
-            //frm.OnSetupFinished += setupCompleted;
-            frm.Show();
+            _dictionary = new frmDictionary();
+            _dictionary.FormClosing += (se, ev) => {
+                _dictionary.Hide();
+                ev.Cancel = true;
+            };
 
-            tm_refresh.Tick += tm_refresh_Tick;
-            tm_refresh_Tick(tm_refresh, new EventArgs()); //Fire the first event
-            tm_refresh.Start();
+            _player = new frmMediaPlayer();
+            _player.FormClosing += (se, ev) => {
+                _player.Hide();
+                ev.Cancel = true;
+            };
+
+            _browser = new frmBrowser();
+            _browser.FormClosing += (se, ev) => {
+                _browser.Hide();
+                ev.Cancel = true;
+            };
+            _browser.Show();
+
+            _timerRefresh.Tick += tm_refresh_Tick;
+            tm_refresh_Tick(_timerRefresh, new EventArgs()); //Fire the first event
+            _timerRefresh.Start();
         }
 
         #region [ Voids ]
 
         private void onOpenBrowserClicked(object sender, EventArgs e)
         {
-
+            _browser.Show();
         }
 
         private void onOpenDictionaryClicked(object sender, EventArgs e)
         {
-
+            _dictionary.Show();
         }
 
         private void onOpenMediaPlayerClicked(object sender, EventArgs e)
         {
-
+            _player.Show();
         }
 
         private void Main_icon_BalloonTipClicked(object sender, EventArgs e)
         {
-            //System.Diagnostics.Process.Start(Properties.Settings.Default.StorageLocation);
+            onOpenBrowserClicked(null, null);
         }
 
         /// <summary>
@@ -67,29 +86,30 @@ namespace English
         /// </summary>
         private void setupIcon()
         {
-            main_icon.Text = "English";
-            main_icon.Icon = English.Properties.Resources.icon;
-            main_icon.ContextMenu = new ContextMenu();
-            main_icon.ContextMenu.MenuItems.Add("Browser...", onOpenBrowserClicked);
-            main_icon.ContextMenu.MenuItems.Add("-");
-            main_icon.ContextMenu.MenuItems.Add("Dictionary...", onOpenDictionaryClicked);
-            main_icon.ContextMenu.MenuItems.Add("About...", onAboutClicked);
-            main_icon.ContextMenu.MenuItems.Add("-");
-            main_icon.ContextMenu.MenuItems.Add("Media Player", onOpenMediaPlayerClicked);
-            main_icon.ContextMenu.MenuItems.Add("-");
-            main_icon.ContextMenu.MenuItems.Add("Quit", onQuitClicked);
-            main_icon.BalloonTipClicked += Main_icon_BalloonTipClicked;
+            _mainIcon.Text = "English";
+            _mainIcon.Icon = English.Properties.Resources.icon;
+            _mainIcon.ContextMenu = new ContextMenu();
+            _mainIcon.ContextMenu.MenuItems.Add("Browser...", onOpenBrowserClicked);
+            _mainIcon.ContextMenu.MenuItems.Add("-");
+            _mainIcon.ContextMenu.MenuItems.Add("Dictionary...", onOpenDictionaryClicked);
+            _mainIcon.ContextMenu.MenuItems.Add("Media Player", onOpenMediaPlayerClicked);
+            _mainIcon.ContextMenu.MenuItems.Add("-");
+            _mainIcon.ContextMenu.MenuItems.Add("About...", onAboutClicked);
+            _mainIcon.ContextMenu.MenuItems.Add("-");
+            _mainIcon.ContextMenu.MenuItems.Add("Quit", onQuitClicked);
+            _mainIcon.BalloonTipClicked += Main_icon_BalloonTipClicked;
+            _mainIcon.MouseClick += onOpenDictionaryClicked;
 
-            main_icon.Visible = true;
+            _mainIcon.Visible = true;
         }
 
         protected override void ExitThreadCore()
         {
-            main_icon.Visible = false;
-            main_icon.Dispose();
+            _mainIcon.Visible = false;
+            _mainIcon.Dispose();
 
-            tm_refresh.Stop();
-            tm_refresh.Dispose();
+            _timerRefresh.Stop();
+            _timerRefresh.Dispose();
 
             base.ExitThreadCore();
         }
@@ -110,21 +130,21 @@ namespace English
             //bool active = Properties.Settings.Default.is_setup;
             if (checkInternet())
             {
-                tm_refresh.Interval = 1000 * 60;
-                if (connectivity_issues)
+                _timerRefresh.Interval = 1000 * 60;
+                if (_connectivityIssues)
                 {
-                    main_icon.Icon = English.Properties.Resources.icon;
-                    main_icon.Text = "English\r\nLast Synchronized " + DateTime.Now.ToString("t");
+                    _mainIcon.Icon = English.Properties.Resources.icon;
+                    _mainIcon.Text = "English\r\nLast Synchronized " + DateTime.Now.ToString("t");
                     Application.DoEvents();
                 }
-                connectivity_issues = false;
+                _connectivityIssues = false;
             }
             else
             {
-                tm_refresh.Interval = 1000 * 5;
-                main_icon.Icon = English.Properties.Resources.offline;
-                main_icon.Text = "English\r\nNo Internet Connection";
-                connectivity_issues = true;
+                _timerRefresh.Interval = 1000 * 5;
+                _mainIcon.Icon = English.Properties.Resources.offline;
+                _mainIcon.Text = "English\r\nNo Internet Connection";
+                _connectivityIssues = true;
                 Application.DoEvents();
             }
         }
@@ -141,28 +161,28 @@ namespace English
         /// <returns></returns>
         private bool checkInternet()
         {
-            if (conn_test_counter == -1)
+            if (_connectCheckCounter == -1)
             {
                 //We have a problem. Major check til it works.
-                conn_test_counter = InternetConnectivity.strongInternetConnectionTest() ? 0 : -1;
-                return conn_test_counter == 0;
+                _connectCheckCounter = InternetConnectivity.strongInternetConnectionTest() ? 0 : -1;
+                return _connectCheckCounter == 0;
             }
 
             if (InternetConnectivity.IsConnectionAvailable())
             {
-                ++conn_test_counter;
-                if (conn_test_counter == 4)
+                ++_connectCheckCounter;
+                if (_connectCheckCounter == 4)
                 {
-                    conn_test_counter = InternetConnectivity.strongInternetConnectionTest() ? 0 : conn_test_counter + 1;
+                    _connectCheckCounter = InternetConnectivity.strongInternetConnectionTest() ? 0 : _connectCheckCounter + 1;
                     Console.WriteLine("[Level 2] Working Internet Connection - Timer Check");
                     return true;
                 }
-                else if (conn_test_counter > 5)
+                else if (_connectCheckCounter > 5)
                 {
-                    conn_test_counter = InternetConnectivity.strongInternetConnectionTest() ? 0 : conn_test_counter + 1;
-                    if (conn_test_counter > 7)
+                    _connectCheckCounter = InternetConnectivity.strongInternetConnectionTest() ? 0 : _connectCheckCounter + 1;
+                    if (_connectCheckCounter > 7)
                     {
-                        conn_test_counter = -1;
+                        _connectCheckCounter = -1;
                         Console.WriteLine("[Level 4] No Internet Connection - Timer Check");
                         return false;
                     }
@@ -182,12 +202,11 @@ namespace English
             else
             {
                 Console.WriteLine("[Level 0] No Connection - Timer Check");
-                conn_test_counter = -1;
+                _connectCheckCounter = -1;
                 return false;
             }
         }
 
-        #endregion
-        
+        #endregion        
     }
 }

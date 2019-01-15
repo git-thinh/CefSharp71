@@ -98,7 +98,13 @@ namespace English
             _mainIcon.ContextMenu.MenuItems.Add("-");
             _mainIcon.ContextMenu.MenuItems.Add("Quit", onQuitClicked);
             _mainIcon.BalloonTipClicked += Main_icon_BalloonTipClicked;
-            _mainIcon.MouseClick += onOpenDictionaryClicked;
+            _mainIcon.MouseClick += (se,ev)=>
+            {
+                if (ev.Button == MouseButtons.Left)
+                {
+                    onOpenDictionaryClicked(null, null);
+                }
+            };
 
             _mainIcon.Visible = true;
         }

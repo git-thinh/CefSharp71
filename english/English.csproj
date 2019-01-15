@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="InternetConnectivity.cs" />
     <Compile Include="MainContext.cs" />
+    <Compile Include="MenuHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

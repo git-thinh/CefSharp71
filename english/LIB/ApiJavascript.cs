@@ -9,39 +9,39 @@ namespace English
 {
     public class ApiJavascript
     {
-        readonly IApp _app;
-        public ApiJavascript(IApp app) { this._app = app; }
+        readonly IContext _app;
+        public ApiJavascript(IContext app) { this._app = app; }
 
         /*/////////////////////////////////////////////////////////////*/
         /*/////////////////////////////////////////////////////////////*/
 
         public void playMp3FromUrl(String url, Int32 repeat)
         {
-            //_app.playMp3FromUrl("https://s3.amazonaws.com/audio.oxforddictionaries.com/en/mp3/hello_gb_1.mp3");
-            //_app.playMp3FromUrl(url, repeat);
-            var playThread = new Thread(timeout => _app.playMp3FromUrl("http://audio.oxforddictionaries.com/en/mp3/ranker_gb_1_8.mp3", (int)timeout));
-            playThread.IsBackground = true;
-            playThread.Start(10000);
+            ////_app.playMp3FromUrl("https://s3.amazonaws.com/audio.oxforddictionaries.com/en/mp3/hello_gb_1.mp3");
+            ////_app.playMp3FromUrl(url, repeat);
+            //var playThread = new Thread(timeout => _app.playMp3FromUrl("http://audio.oxforddictionaries.com/en/mp3/ranker_gb_1_8.mp3", (int)timeout));
+            //playThread.IsBackground = true;
+            //playThread.Start(10000);
         }
 
         public void speechSentence(String text, Int32 repeat)
         {
-            _app.speechSentence(text, repeat);
+            //_app.speechSentence(text, repeat);
         }
 
         public void speechWords(String text, Int32 repeat)
         {
-            _app.speechWords(text, repeat);
+            //_app.speechWords(text, repeat);
         }
 
         public void speechWord(String text, Int32 repeat)
         {
-            _app.speechWord(text, repeat);
+            //_app.speechWord(text, repeat);
         }
 
         public void speechCancel()
         {
-            _app.speechCancel();
+            //_app.speechCancel();
         }
 
         /*/////////////////////////////////////////////////////////////*/
@@ -49,17 +49,18 @@ namespace English
 
         public String fetchResponse(String url)
         {
-            return _app.fetchResponse(url);
+            //return _app.fetchResponse(url);
+            return string.Empty;
         }
 
         public void fetchHttp(String url)
         {
-            _app.fetchHttp(url);
+            //_app.fetchHttp(url);
         }
 
         public void fetchHttps(String url)
         {
-            _app.fetchHttps(url);
+            //_app.fetchHttps(url);
         }
 
         /*/////////////////////////////////////////////////////////////*/
@@ -67,17 +68,17 @@ namespace English
 
         public void appOpenDevtool(String menu)
         {
-            _app.webViewMain_ShowDevTools();
+            //_app.webViewMain_ShowDevTools();
         }
 
         public void appOpenUrl(String url, String title)
         {
-            _app.webViewMain_Load(url);
+            //_app.webViewMain_Load(url);
         }
 
         public void appReload()
         {
-            _app.webViewMain_Reload();
+            //_app.webViewMain_Reload();
         }
 
         /*/////////////////////////////////////////////////////////////*/

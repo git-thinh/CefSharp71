@@ -71,6 +71,7 @@
       <HintPath>..\Microsoft\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Cors">
       <HintPath>..\Microsoft\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -182,6 +183,7 @@
     <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\MouseStruct.cs" />
     <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\Point.cs" />
     <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\ThreadNativeMethods.cs" />
+    <Compile Include="LIB\JobWorker.cs" />
     <Compile Include="LIB\Microsoft.Owin.FileSystems\EmbeddedResourceFileSystem.cs" />
     <Compile Include="LIB\Microsoft.Owin.FileSystems\IFileInfo.cs" />
     <Compile Include="LIB\Microsoft.Owin.FileSystems\IFileSystem.cs" />

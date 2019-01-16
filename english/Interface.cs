@@ -4,6 +4,47 @@ using System.Text;
 
 namespace English
 {
+    public interface IContext {
+        void jobPush();
+    }
+
+    public class oProxy
+    {
+        public oProxyTarget Target { set; get; }
+        public oProxyDestination Destination { set; get; }
+    }
+
+    public class oProxyTarget
+    {
+        public string UrlBase { set; get; }
+        public oProxyTarget() {
+            this.UrlBase = "http://localhost:321";
+        }
+    }
+    
+    public class oProxyDestination
+    {
+        public bool hasLogAllUrl { set; get; }
+
+        public string UrlWesocket { set; get; }
+        public string UrlHttp { set; get; }
+        public string PathRoot { set; get; }
+
+        public oProxyDestinationSettings Settings { set; get; }
+
+        public oProxyDestination() {
+            this.UrlWesocket = "ws://localhost:33333";
+            this.UrlHttp = "http://localhost:11111";
+            this.PathRoot = "/.";
+        }
+    }
+    public class oProxyDestinationSettings
+    {
+        public string Url { set; get; }
+        public string[] appendUrl { set; get; }
+    }
+
+
     public interface IApp
     {
         int socketPort { get; }

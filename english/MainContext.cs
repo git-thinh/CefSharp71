@@ -8,10 +8,11 @@ using Newtonsoft.Json;
 using System.IO;
 using Microsoft.Win32;
 using Fleck;
+using System.Web.Hosting;
 
 namespace English
 {
-    public class MainContext : ApplicationContext, IApp
+    public class MainContext : ApplicationContext, IContext
     {
         #region [ Crucial Variables ]
 
@@ -29,6 +30,12 @@ namespace English
         readonly frmBrowser _browser;
         readonly frmDictionary _dictionary;
         readonly frmMediaPlayer _player;
+
+        public int socketPort => throw new NotImplementedException();
+
+        public IWebSocketConnection socketCurrent => throw new NotImplementedException();
+
+        public oApp appInfo => throw new NotImplementedException();
 
         #endregion
 
@@ -238,104 +245,10 @@ namespace English
 
         #endregion
 
-        #region [ IAPP ]
-
-        public int socketPort => throw new NotImplementedException();
-
-        public IWebSocketConnection socketCurrent => throw new NotImplementedException();
-
-        public oApp appInfo => throw new NotImplementedException();
-        
-        public void socketSendMessage(string message)
+        public void jobPush()
         {
-            throw new NotImplementedException();
+            HostingEnvironment.QueueBackgroundWorkItem(cancellationToken => new Worker().StartProcessing(cancellationToken));
         }
-
-        public void socketPushMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool dicWordPhraseAdd(string name, string phonics, string mean)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool dicSentenceAdd(string text)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string fetchResponse(string url)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void fetchHttp(string url)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void fetchHttps(string url)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void downloadMp3(string url, int timeOutDownloadMp3 = 30000)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void playMp3FromUrl(string url, int repeat, bool isRunOnline = false, int timeOutDownloadMp3 = 30000)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void speechSentence(string text, int repeat)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void speechWords(string text, int repeat)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void speechWord(string text, int repeat)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void speechCancel()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void writeLog(string text)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void webViewMain_Load(string url)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void webViewMain_Reload()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void webViewMain_ShowDevTools()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void webViewMain_Stop()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
+         
     }
 }

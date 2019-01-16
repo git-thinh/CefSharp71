@@ -7,12 +7,16 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
 using Microsoft.Win32;
+using Fleck;
 
 namespace English
 {
-    public class MainContext : ApplicationContext
+    public class MainContext : ApplicationContext, IApp
     {
         #region [ Crucial Variables ]
+
+        const string PROXY_URL = "http://+:9000/";
+        const string PROXY_PATH_ROOT = @"C:\WebUI_v3\DEV\dev\source\FUM_dev\trunk_multi";
 
         //For the task tray icon.
         NotifyIcon _mainIcon = new NotifyIcon();
@@ -33,6 +37,8 @@ namespace English
         /// </summary>
         public MainContext()
         {
+            ProxyWebServer.Start(PROXY_URL, PROXY_PATH_ROOT);
+
             setupIcon();
 
             _dictionary = new frmDictionary();
@@ -52,12 +58,39 @@ namespace English
                 _browser.Hide();
                 ev.Cancel = true;
             };
-            _browser.Show();
+            //_browser.Show();
 
             _timerRefresh.Tick += tm_refresh_Tick;
             tm_refresh_Tick(_timerRefresh, new EventArgs()); //Fire the first event
             _timerRefresh.Start();
         }
+
+        protected override void ExitThreadCore()
+        {
+            _mainIcon.Visible = false;
+            _mainIcon.Dispose();
+                        
+            _timerRefresh.Stop();
+            _timerRefresh.Dispose();
+
+            ProxyWebServer.Stop();
+
+            base.ExitThreadCore();
+        }
+
+        #region [ Websocket ]
+
+        void websocket_Init() {
+            var server = new WebSocketServer("ws://0.0.0.0:8181");
+            server.Start(socket =>
+            {
+                socket.OnOpen = () => Console.WriteLine("Open!");
+                socket.OnClose = () => Console.WriteLine("Close!");
+                socket.OnMessage = message => socket.Send(message);
+            });
+        }
+
+        #endregion
 
         #region [ Voids ]
 
@@ -109,16 +142,6 @@ namespace English
             _mainIcon.Visible = true;
         }
 
-        protected override void ExitThreadCore()
-        {
-            _mainIcon.Visible = false;
-            _mainIcon.Dispose();
-
-            _timerRefresh.Stop();
-            _timerRefresh.Dispose();
-
-            base.ExitThreadCore();
-        }
 
         private void onQuitClicked(object sender, EventArgs e)
         {
@@ -213,6 +236,106 @@ namespace English
             }
         }
 
-        #endregion        
+        #endregion
+
+        #region [ IAPP ]
+
+        public int socketPort => throw new NotImplementedException();
+
+        public IWebSocketConnection socketCurrent => throw new NotImplementedException();
+
+        public oApp appInfo => throw new NotImplementedException();
+        
+        public void socketSendMessage(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void socketPushMessage(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool dicWordPhraseAdd(string name, string phonics, string mean)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool dicSentenceAdd(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string fetchResponse(string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void fetchHttp(string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void fetchHttps(string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void downloadMp3(string url, int timeOutDownloadMp3 = 30000)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void playMp3FromUrl(string url, int repeat, bool isRunOnline = false, int timeOutDownloadMp3 = 30000)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void speechSentence(string text, int repeat)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void speechWords(string text, int repeat)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void speechWord(string text, int repeat)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void speechCancel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void writeLog(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void webViewMain_Load(string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void webViewMain_Reload()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void webViewMain_ShowDevTools()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void webViewMain_Stop()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

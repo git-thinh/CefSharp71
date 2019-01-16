@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6875F122-22D5-46A6-BF14-5626F5DB9823}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>English</RootNamespace>
+    <AssemblyName>English</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\build\</OutputPath>
+    <DefineConstants>NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CefSharp">
+      <HintPath>..\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core">
+      <HintPath>..\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.WinForms">
+      <HintPath>..\CefSharp.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\Microsoft\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors">
+      <HintPath>..\Microsoft\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener">
+      <HintPath>..\Microsoft\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting">
+      <HintPath>..\Microsoft\Microsoft.Owin.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\Microsoft\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Microsoft\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\Microsoft\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Microsoft\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\Microsoft\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="FORM\frmDictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\frmMediaPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FORM\frmBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface.cs" />
+    <Compile Include="LIB\ApiJavascript.cs" />
+    <Compile Include="LIB\InternetConnectivity.cs" />
+    <Compile Include="LIB\ControlTransparent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LIB\Fleck\ConnectionNotAvailableException.cs" />
+    <Compile Include="LIB\Fleck\FleckLog.cs" />
+    <Compile Include="LIB\Fleck\FrameType.cs" />
+    <Compile Include="LIB\Fleck\HandlerFactory.cs" />
+    <Compile Include="LIB\Fleck\Handlers\ComposableHandler.cs" />
+    <Compile Include="LIB\Fleck\Handlers\Draft76Handler.cs" />
+    <Compile Include="LIB\Fleck\Handlers\FlashSocketPolicyRequestHandler.cs" />
+    <Compile Include="LIB\Fleck\Handlers\Hybi13Handler.cs" />
+    <Compile Include="LIB\Fleck\Helpers\MonoHelper.cs" />
+    <Compile Include="LIB\Fleck\Interfaces\IHandler.cs" />
+    <Compile Include="LIB\Fleck\Interfaces\ISocket.cs" />
+    <Compile Include="LIB\Fleck\Interfaces\IWebSocketConnection.cs" />
+    <Compile Include="LIB\Fleck\Interfaces\IWebSocketConnectionInfo.cs" />
+    <Compile Include="LIB\Fleck\Interfaces\IWebSocketServer.cs" />
+    <Compile Include="LIB\Fleck\IntExtensions.cs" />
+    <Compile Include="LIB\Fleck\QueuedStream.cs" />
+    <Compile Include="LIB\Fleck\ReadState.cs" />
+    <Compile Include="LIB\Fleck\RequestParser.cs" />
+    <Compile Include="LIB\Fleck\SocketWrapper.cs" />
+    <Compile Include="LIB\Fleck\SubProtocolNegotiationFailureException.cs" />
+    <Compile Include="LIB\Fleck\SubProtocolNegotiator.cs" />
+    <Compile Include="LIB\Fleck\WebSocketConnection.cs" />
+    <Compile Include="LIB\Fleck\WebSocketConnectionInfo.cs" />
+    <Compile Include="LIB\Fleck\WebSocketException.cs" />
+    <Compile Include="LIB\Fleck\WebSocketHttpRequest.cs" />
+    <Compile Include="LIB\Fleck\WebSocketServer.cs" />
+    <Compile Include="LIB\Fleck\WebSocketStatusCodes.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Combination.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Hook.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\HotKeys\HotKeyArgs.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\HotKeys\HotKeySet.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\HotKeys\HotKeySetCollection.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\HotKeys\HotKeySetsListener.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\IKeyboardEvents.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\IKeyboardMouseEvents.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\IMouseEvents.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\AppEventFacade.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\AppKeyListener.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\AppMouseListener.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\BaseListener.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\ButtonSet.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\Callback.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\Chord.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\EventFacade.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\GlobalEventFacade.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\GlobalKeyListener.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\GlobalMouseListener.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\KeyboardState.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\KeyListener.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\KeysExtensions.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\MouseListener.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Implementation\Subscribe.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\KeyCombinationExtensions.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\KeyEventArgsExt.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\KeyPressEventArgsExt.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\MouseEventExtArgs.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\Sequence.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\SequenceBase.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\AppMouseStruct.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\CallbackData.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\HookHelper.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\HookIds.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\HookNativeMethods.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\HookProcedure.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\HookProcedureHandle.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\HookResult.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\HotkeysNativeMethods.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\KeyboardHookStruct.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\KeyboardNativeMethods.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\Messages.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\MouseNativeMethods.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\MouseStruct.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\Point.cs" />
+    <Compile Include="LIB\Gma.System.MouseKeyHook\WinApi\ThreadNativeMethods.cs" />
+    <Compile Include="LIB\Microsoft.Owin.FileSystems\EmbeddedResourceFileSystem.cs" />
+    <Compile Include="LIB\Microsoft.Owin.FileSystems\IFileInfo.cs" />
+    <Compile Include="LIB\Microsoft.Owin.FileSystems\IFileSystem.cs" />
+    <Compile Include="LIB\Microsoft.Owin.FileSystems\PhysicalFileSystem.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\Constants.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\ContentTypes\FileExtensionContentTypeProvider.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\ContentTypes\IContentTypeProvider.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\DefaultFilesExtensions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\DefaultFilesMiddleware.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\DefaultFilesOptions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\DirectoryBrowserExtensions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\DirectoryBrowserMiddleware.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\DirectoryBrowserOptions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\DirectoryFormatters\HtmlDirectoryFormatter.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\DirectoryFormatters\IDirectoryFormatter.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\FileServerExtensions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\FileServerOptions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\GlobalSuppressions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\Helpers.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\Infrastructure\RangeHelpers.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\Infrastructure\SharedOptions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\Infrastructure\SharedOptionsBase.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\SendFileExtensions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\SendFileMiddleware.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\SendFileResponseExtensions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\StaticFileContext.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\StaticFileExtensions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\StaticFileMiddleware.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\StaticFileOptions.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\StaticFileResponseContext.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\StreamCopyOperation.cs" />
+    <Compile Include="LIB\Microsoft.Owin.StaticFiles\____Resources.cs" />
+    <Compile Include="LIB\ProxyWebServer.cs" />
+    <Compile Include="MainContext.cs" />
+    <Compile Include="LIB\MenuHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LIB\Security.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+    <Content Include="LIB\Gma.System.MouseKeyHook\HotKeys\ReadMe.txt" />
+    <Content Include="ReadMe.txt" />
+    <None Include="offline.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

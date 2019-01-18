@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
+using English.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,8 @@ namespace English
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     CefInit();
-                    Application.Run(new MainContext());
+                    //Application.Run(new MainContext());
+                    Application.Run(new frmTestWebUI());
                     Cef.Shutdown();
                 }
                 finally
@@ -42,8 +44,7 @@ namespace English
         static void CefInit()
         {
             Cef.EnableHighDPISupport();
-            AbstractCefSettings settings = new CefSettings();
-            settings.MultiThreadedMessageLoop = true;
+            AbstractCefSettings settings = new CefSettings(); 
             settings.ExternalMessagePump = false;
 
             // Set Google API keys, used for Geolocation requests sans GPS.  See http://www.chromium.org/developers/how-tos/api-keys
@@ -71,10 +72,12 @@ namespace English
             //settings.CefCommandLineArgs.Add("debug-plugin-loading", "1"); //Dumps extra logging about plugin loading to the log file.
             //settings.CefCommandLineArgs.Add("disable-plugins-discovery", "1"); //Disable discovering third-party plugins. Effectively loading only ones shipped with the browser plus third-party ones as specified by --extra-plugin-dir and --load-plugin switches
             //settings.CefCommandLineArgs.Add("enable-system-flash", "1"); //Automatically discovered and load a system-wide installation of Pepper Flash.
-            //settings.CefCommandLineArgs.Add("allow-running-insecure-content", "1"); //By default, an https page cannot run JavaScript, CSS or plugins from http URLs. This provides an override to get the old insecure behavior. Only available in 47 and above.
+            settings.CefCommandLineArgs.Add("allow-running-insecure-content", "1"); //By default, an https page cannot run JavaScript, CSS or plugins from http URLs. This provides an override to get the old insecure behavior. Only available in 47 and above.
 
             //settings.CefCommandLineArgs.Add("enable-logging", "1"); //Enable Logging for the Renderer process (will open with a cmd prompt and output debug messages - use in conjunction with setting LogSeverity = LogSeverity.Verbose;)
             //settings.LogSeverity = LogSeverity.Verbose; // Needed for enable-logging to output messages
+            //settings.CefCommandLineArgs.Add("enable-logging", "0"); //Enable Logging for the Renderer process (will open with a cmd prompt and output debug messages - use in conjunction with setting LogSeverity = LogSeverity.Verbose;)
+            settings.LogSeverity = LogSeverity.Disable; // Needed for enable-logging to output messages
 
             //settings.CefCommandLineArgs.Add("disable-extensions", "1"); //Extension support can be disabled
             //settings.CefCommandLineArgs.Add("disable-pdf-extension", "1"); //The PDF extension specifically can be disabled
@@ -111,7 +114,8 @@ namespace English
             //-------------------------------------------------------------------------------------
             //settings.CefCommandLineArgs.Add("touch-events", "enabled");
             //settings.CefCommandLineArgs.Add("mouse-events", "disabled");
-            settings.CefCommandLineArgs.Add("js-flags", "--harmony-proxies");
+            settings.CefCommandLineArgs.Add("js-flags", "--harmony-proxies"); 
+            settings.MultiThreadedMessageLoop = true;
             //-------------------------------------------------------------------------------------
 
             //Enables Uncaught exception handler
@@ -191,7 +195,7 @@ namespace English
             //////                                                        defaultPage: "home.html") //Optional param will default to index.html
             //////});
 
-            //////settings.RegisterExtension(new V8Extension("cefsharp/example", Resources.extension));
+            settings.RegisterExtension(new V8Extension("english", Resources.extension));
 
             //This must be set before Cef.Initialized is called
             CefSharpSettings.FocusedNodeChangedEnabled = true;

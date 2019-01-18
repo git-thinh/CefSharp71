@@ -42,7 +42,7 @@ namespace English
             };
             this.Controls.Add(browser);
             this.Browser = browser;
-            browser.MenuHandler = new MenuHandler();
+            browser.MenuHandler = new MenuHandler(this);
         }
 
         ~frmBrowser()

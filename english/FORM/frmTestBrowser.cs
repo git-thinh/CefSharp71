@@ -18,9 +18,9 @@ namespace English
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
-        const string URL = "https://www.eslfast.com/";
+        //const string URL = "https://www.eslfast.com/";
         //const string URL = "https://dictionary.cambridge.org/";
-        //const string URL = "https://youtube.com";
+        const string URL = "https://youtube.com";
         readonly StringBuilder LogBuilder;
         public frmTestBrowser()
         {
@@ -142,7 +142,7 @@ namespace English
 
         void SendLogUrl(string url)
         {
-            if (url.Contains("chrome-devtools")) return;
+            if (url.Contains("chrome-devtools") || url.Contains("chrome-extension")) return;
             if (OnEventUrlArrived != null) OnEventUrlArrived(url);
         }
 
@@ -159,6 +159,7 @@ namespace English
                 || url.Contains("click") 
                 || url.Contains("sharethis")
                 || url.Contains("counter")
+                || url.Contains("adserver")
                 || url.Contains("reach")
                 || url.Contains("visitor"))
             {

@@ -39,7 +39,8 @@ namespace English
             model.AddItem((CefMenuCommand)ReloadPage, "Reload");
             model.AddItem((CefMenuCommand)ShowDevTools, "Show DevTools");
             model.AddItem((CefMenuCommand)CloseDevTools, "Close DevTools");
-            model.AddItem((CefMenuCommand)OpenLogRequestResource, "Open Log Request Resource");
+            model.AddItem((CefMenuCommand)OpenLogRequestResource, "Open Log");
+            model.AddItem((CefMenuCommand)ClearLogRequestResource, "Clear Log");
 
             // Add a separator
             model.AddSeparator();

@@ -19,6 +19,8 @@ namespace English
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
         const string URL = "https://www.eslfast.com/";
+        //const string URL = "https://dictionary.cambridge.org/";
+        //const string URL = "https://youtube.com";
         readonly StringBuilder LogBuilder;
         public frmTestBrowser()
         {
@@ -61,7 +63,7 @@ namespace English
             };
             browser.MenuHandler = new MenuHandler(this);
             //browser.RenderProcessMessageHandler = new RenderProcessMessageHandler2();
-            //browser.JsDialogHandler = new JsDialogHandler();
+            browser.JsDialogHandler = new JsDialogHandler();
             var requestResource = new RequestResourceHandlerFactory();
             requestResource.OnEventUrlArrived += (string url) =>
             {
@@ -73,27 +75,27 @@ namespace English
             this.Controls.Add(browser);
             this.Browser = browser;
 
-            ////Wait for the page to finish loading (all resources will have been loaded, rendering is likely still happening)
+            //////Wait for the page to finish loading (all resources will have been loaded, rendering is likely still happening)
             //browser.LoadingStateChanged += (sender, args) =>
             //{
             //    //Wait for the Page to finish loading
             //    if (args.IsLoading == false)
-            //    {
-            //        //args.Browser.GetHost().ExecuteJavaScriptAsync("alert('All Resources Have Loaded');");
-            //    }
-
-
+            //        browser.CrossThreadCalls(() => browser.Visible = true);
             //};
 
-            ////Wait for the MainFrame to finish loading
+            //////Wait for the MainFrame to finish loading
             //browser.FrameLoadEnd += (sender, args) =>
             //{
             //    //Wait for the MainFrame to finish loading
             //    if (args.Frame.IsMain)
             //    {
-            //        args.Frame.ExecuteJavaScriptAsync("console.log('?????????????????: MainFrame finished loading');");
+            //        //args.Frame.ExecuteJavaScriptAsync("console.log('?????????????????: MainFrame finished loading');");
+            //    }
+            //    else {
+            //        browser.CrossThreadCalls(() => browser.Visible = false);
             //    }
             //};
+            
 
 
         }
@@ -148,7 +150,17 @@ namespace English
         {
             string url = request.Url;
 
-            if (url.Contains("google") || url.Contains("facebook") || url.Contains("sharethis"))
+            if (url.Contains("facebook") 
+                //|| url.Contains("google") 
+                || url.Contains("google-analytics") 
+                || url.Contains("googlesyndication") 
+                || url.Contains("adservice.google.com") 
+                || url.Contains("googletagservices") 
+                || url.Contains("click") 
+                || url.Contains("sharethis")
+                || url.Contains("counter")
+                || url.Contains("reach")
+                || url.Contains("visitor"))
             {
                 SendLogUrl("##> " + request.Method + ": " + url);
                 return new RequestResourceCanceler();
@@ -214,7 +226,9 @@ namespace English
         {
             newBrowser = null;
             // Preserve new windows to be opened and load all popup urls in the same browser view
-            browserControl.Load(targetUrl);
+            //browserControl.Load(targetUrl);
+            //frame.ExecuteJavaScriptAsync("setTimeout(function () { location.href = '" + targetUrl + "'; }, 1);");
+            frame.ExecuteJavaScriptAsync(" location.href = '" + targetUrl + "'; ");
             return true;
         }
 

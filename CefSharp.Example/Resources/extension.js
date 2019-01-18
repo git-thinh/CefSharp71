@@ -12,3 +12,4 @@ if (!cefsharp.example)
         alert(text);
     };
 })();
+

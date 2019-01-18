@@ -29,7 +29,7 @@ namespace English
             // model.Clear();
 
             //Removing existing menu item
-            bool removed = model.Remove(CefMenuCommand.ViewSource); // Remove "View Source" option
+            //bool removed = model.Remove(CefMenuCommand.ViewSource); // Remove "View Source" option
             model.Remove(CefMenuCommand.Print); // Remove menu Print
 
             // Add a separator

@@ -9,6 +9,7 @@ namespace English
     {
         void RaiseEventMenuBrowser(int menuCode);
         void CloseForm();
+        void ClearLog();
     }
 
     public interface IContext

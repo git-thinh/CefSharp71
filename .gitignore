@@ -15,3 +15,4 @@ build/english.vshost.exe.config
 build/debug.log
 /build/debug.log
 build/English.vshost.exe.manifest
+build/request.txt

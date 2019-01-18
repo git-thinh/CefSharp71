@@ -50,7 +50,7 @@ namespace English
                     UniversalAccessFromFileUrls = CefState.Enabled
                 }
             };
-            browser.MenuHandler = new MenuHandler(this);
+            //browser.MenuHandler = new MenuHandler(this);
             browser.RenderProcessMessageHandler = new RenderProcessMessageHandler();
             browser.IsBrowserInitializedChanged += (se, ev) =>
             {

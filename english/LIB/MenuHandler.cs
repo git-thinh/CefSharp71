@@ -9,17 +9,19 @@ namespace English
 {
     internal class MenuHandler : IContextMenuHandler
     {
-        readonly Form Parent;
-        public MenuHandler(Form parent) : base() { this.Parent = parent; }
+        readonly IForm Parent;
+        public MenuHandler(IForm parent) : base() { this.Parent = parent; }
 
-        private const int HrSpace = 26500;
+        private const int HrSpace = 27500;
 
-        private const int ShowDevTools = 26501;
-        private const int CloseDevTools = 26502;
+        private const int ReloadPage = 27003;
+        private const int ShowDevTools = 27001;
+        private const int CloseDevTools = 27002;
+        private const int OpenLogRequestResource = 27004;
+        private const int ClearLogRequestResource = 27005;
 
-        private const int ReloadPage = 26503;
 
-        private const int ExitApplication = 26504;
+        private const int ExitApplication = 27100;
 
         void IContextMenuHandler.OnBeforeContextMenu(IWebBrowser browserControl, IBrowser browser, IFrame frame, IContextMenuParams parameters, IMenuModel model)
         {
@@ -37,6 +39,7 @@ namespace English
             model.AddItem((CefMenuCommand)ReloadPage, "Reload");
             model.AddItem((CefMenuCommand)ShowDevTools, "Show DevTools");
             model.AddItem((CefMenuCommand)CloseDevTools, "Close DevTools");
+            model.AddItem((CefMenuCommand)OpenLogRequestResource, "Open Log Request Resource");
 
             // Add a separator
             model.AddSeparator();
@@ -57,8 +60,10 @@ namespace English
                 case ReloadPage:
                     browser.Reload();
                     break;
+                case ClearLogRequestResource:
+                case OpenLogRequestResource:
                 case ExitApplication:
-                    this.Parent.CrossThreadCalls(() => this.Parent.Close());
+                    this.Parent.RaiseEventMenuBrowser((int)commandId);
                     break;
             }
             return false;

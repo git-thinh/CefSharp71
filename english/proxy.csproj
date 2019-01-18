@@ -36,6 +36,9 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CefSharp">
       <HintPath>..\CefSharp.dll</HintPath>
@@ -94,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="FORM\frmTestBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LIB\CrossThreadExtensions.cs" />
     <Compile Include="FORM\frmBase.cs">
       <SubType>Form</SubType>

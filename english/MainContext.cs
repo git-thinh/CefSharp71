@@ -30,13 +30,7 @@ namespace English
         readonly frmBrowser _browser;
         readonly frmDictionary _dictionary;
         readonly frmMediaPlayer _player;
-
-        public int socketPort => throw new NotImplementedException();
-
-        public IWebSocketConnection socketCurrent => throw new NotImplementedException();
-
-        public oApp appInfo => throw new NotImplementedException();
-
+        
         #endregion
 
         /// <summary>

@@ -4,7 +4,15 @@ using System.Text;
 
 namespace English
 {
-    public interface IContext {
+
+    public interface IForm
+    {
+        void RaiseEventMenuBrowser(int menuCode);
+        void CloseForm();
+    }
+
+    public interface IContext
+    {
         void jobPush();
     }
 

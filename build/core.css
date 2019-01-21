@@ -1,0 +1,27 @@
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+}
+
+::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+}
+
+::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+}
+
+/*////////////////////////////////////*/
+
+button,
+input[type="text"],
+input[type="submit"],
+input[type="button"],
+textarea,
+ins {
+    display: none !important;
+}

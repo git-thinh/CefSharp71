@@ -21,17 +21,34 @@ namespace English
 
         //For the task tray icon.
         NotifyIcon _mainIcon = new NotifyIcon();
-        
+
         //Check if it's time to update.
-        Timer _timerRefresh = new Timer() { Interval = 1000 * 60 };        
+        Timer _timerRefresh = new Timer() { Interval = 1000 * 60 };
         bool _connectivityIssues = false;
         int _connectCheckCounter = 0;
 
         readonly frmBrowser _browser;
         readonly frmDictionary _dictionary;
         readonly frmMediaPlayer _player;
-        
+
         #endregion
+
+        public string CoreCSS
+        {
+            get
+            {
+                if (File.Exists("core.css")) return @" <style type=""text/css""> " + File.ReadAllText("core.css") + " </style> ";
+                return string.Empty;
+            }
+        }
+        public string CoreJS
+        {
+            get
+            {
+                if (File.Exists("core.js")) return @" <script type=""text/javascript""> " + File.ReadAllText("core.js") + " </script> ";
+                return string.Empty;
+            }
+        }
 
         /// <summary>
         /// Gets this whole application rolling
@@ -42,20 +59,25 @@ namespace English
 
             setupIcon();
 
+            new frmTestBrowser(this).Show();
+
             _dictionary = new frmDictionary();
-            _dictionary.FormClosing += (se, ev) => {
+            _dictionary.FormClosing += (se, ev) =>
+            {
                 _dictionary.Hide();
                 ev.Cancel = true;
             };
 
             _player = new frmMediaPlayer();
-            _player.FormClosing += (se, ev) => {
+            _player.FormClosing += (se, ev) =>
+            {
                 _player.Hide();
                 ev.Cancel = true;
             };
 
             _browser = new frmBrowser();
-            _browser.FormClosing += (se, ev) => {
+            _browser.FormClosing += (se, ev) =>
+            {
                 _browser.Hide();
                 ev.Cancel = true;
             };
@@ -70,7 +92,7 @@ namespace English
         {
             _mainIcon.Visible = false;
             _mainIcon.Dispose();
-                        
+
             _timerRefresh.Stop();
             _timerRefresh.Dispose();
 
@@ -81,7 +103,8 @@ namespace English
 
         #region [ Websocket ]
 
-        void websocket_Init() {
+        void websocket_Init()
+        {
             var server = new WebSocketServer("ws://0.0.0.0:8181");
             server.Start(socket =>
             {
@@ -132,7 +155,7 @@ namespace English
             _mainIcon.ContextMenu.MenuItems.Add("-");
             _mainIcon.ContextMenu.MenuItems.Add("Quit", onQuitClicked);
             _mainIcon.BalloonTipClicked += Main_icon_BalloonTipClicked;
-            _mainIcon.MouseClick += (se,ev)=>
+            _mainIcon.MouseClick += (se, ev) =>
             {
                 if (ev.Button == MouseButtons.Left)
                 {
@@ -243,6 +266,6 @@ namespace English
         {
             HostingEnvironment.QueueBackgroundWorkItem(cancellationToken => new Worker().StartProcessing(cancellationToken));
         }
-         
+
     }
 }

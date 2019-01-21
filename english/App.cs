@@ -30,8 +30,8 @@ namespace English
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     CefInit();
-                    //Application.Run(new MainContext());
-                    Application.Run(new frmTestBrowser());
+                    Application.Run(new MainContext());
+                    //Application.Run(new frmTestBrowser());
                     Cef.Shutdown();
                 }
                 finally

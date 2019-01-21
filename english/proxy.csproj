@@ -104,15 +104,6 @@
     <Compile Include="FORM\frmBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FORM\frmTestWebUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM\frmTestProxy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FORM\frmTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FORM\frmDictionary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +252,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\build\core.css">
+      <Link>core.css</Link>
+    </Content>
+    <Content Include="..\build\core.js">
+      <Link>core.js</Link>
+    </Content>
     <Content Include="Extension\extension.js" />
     <Content Include="icon.ico" />
     <Content Include="LIB\Gma.System.MouseKeyHook\HotKeys\ReadMe.txt" />

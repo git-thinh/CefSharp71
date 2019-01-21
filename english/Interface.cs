@@ -7,6 +7,7 @@ namespace English
 
     public interface IForm
     {
+        IContext Context { get; }
         void RaiseEventMenuBrowser(int menuCode);
         void CloseForm();
         void ClearLog();
@@ -15,6 +16,8 @@ namespace English
     public interface IContext
     {
         void jobPush();
+        string CoreCSS { get; }
+        string CoreJS { get; }
     }
 
     public class oProxy

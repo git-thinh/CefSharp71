@@ -19,11 +19,12 @@ namespace English
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
-        const string URL = "https://www.eslfast.com/";
+        const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
+        //const string URL = "https://www.eslfast.com/";
         //const string URL = "https://dictionary.cambridge.org/";
         //const string URL = "https://youtube.com";
         readonly StringBuilder LogBuilder;
-        public frmTestBrowser()
+        public frmTestBrowser(IContext context) : base(context)
         {
             LogBuilder = new StringBuilder();
             this.Text = "";
@@ -60,7 +61,7 @@ namespace English
             };
             browser.IsBrowserInitializedChanged += (se, ev) =>
             {
-                //browser.ShowDevTools();
+                browser.ShowDevTools();
             };
             browser.RequestHandler = new RequestHandler(this);
             browser.MenuHandler = new MenuHandler(this);
@@ -142,7 +143,9 @@ namespace English
                 //responseDictionary.Add(request.Identifier, dataFilter);
                 //return dataFilter;
 
-                return new AppendResponseFilter(System.Environment.NewLine + "<!-- CefSharp Appended this comment. -->");
+                return new AppendResponseFilter(System.Environment.NewLine + 
+                    "<!-- CefSharp Appended this comment. -->" + 
+                    this.Parent.Context.CoreCSS + this.Parent.Context.CoreJS);
             }
 
             //return new PassThruResponseFilter();

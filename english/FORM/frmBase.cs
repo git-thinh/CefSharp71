@@ -4,15 +4,18 @@ using System.Windows.Forms;
 
 namespace English
 {
-    public partial class frmBase : Form
+    public class frmBase : Form
     {
-        public frmBase()
+        public IContext Context { get; private set; }
+        public frmBase(IContext context)
         {
-            //InitializeComponent();
+            this.Context = context;
+
             this.FormBorderStyle = FormBorderStyle.None;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
+
         private const int cGrip = 5;      // Grip size
         private const int cCaption = 7;   // Caption bar height;
 

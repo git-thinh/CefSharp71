@@ -59,14 +59,17 @@ namespace English
 
             setupIcon();
 
-            new frmTestBrowser(this).Show();
+            //new frmTestBrowser(this).Show();
 
-            _dictionary = new frmDictionary();
+            _dictionary = new frmDictionary(this);
             _dictionary.FormClosing += (se, ev) =>
             {
                 _dictionary.Hide();
                 ev.Cancel = true;
+                //??????????????????????????????????
+                this.ExitThreadCore();
             };
+            _dictionary.Show();
 
             _player = new frmMediaPlayer();
             _player.FormClosing += (se, ev) =>

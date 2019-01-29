@@ -139,35 +139,35 @@ namespace English
                 //}
 
                 ////Only called for our customScheme
-                //var dataFilter = new MemoryStreamResponseFilter();
-                //responseDictionary.Add(request.Identifier, dataFilter);
-                //return dataFilter;
+                var dataFilter = new MemoryStreamResponseFilter();
+                responseDictionary.Add(request.Identifier, dataFilter);
+                return dataFilter;
 
-                return new AppendResponseFilter(System.Environment.NewLine + 
-                    "<!-- CefSharp Appended this comment. -->" + 
-                    this.Parent.Context.CoreCSS + this.Parent.Context.CoreJS);
+                //return new AppendResponseFilter(System.Environment.NewLine + 
+                //    "<!-- CefSharp Appended this comment. -->" + 
+                //    this.Parent.Context.CoreCSS + this.Parent.Context.CoreJS);
             }
 
             //return new PassThruResponseFilter();
             return null;
         }
 
-        //public override void OnResourceLoadComplete(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response, UrlRequestStatus status, long receivedContentLength)
-        //{
-        //    var url = request.Url;
-        //    if (url == browserControl.Address)
-        //    {
-        //        MemoryStreamResponseFilter filter;
-        //        if (responseDictionary.TryGetValue(request.Identifier, out filter))
-        //        {
-        //            //TODO: Do something with the data here
-        //            var data = filter.Data;
-        //            var dataLength = filter.Data.Length;
-        //            //NOTE: You may need to use a different encoding depending on the request
-        //            var dataAsUtf8String = Encoding.UTF8.GetString(data);
-        //        }
-        //    }
-        //}
+        public override void OnResourceLoadComplete(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response, UrlRequestStatus status, long receivedContentLength)
+        {
+            var url = request.Url;
+            if (url == browserControl.Address)
+            {
+                MemoryStreamResponseFilter filter;
+                if (responseDictionary.TryGetValue(request.Identifier, out filter))
+                {
+                    //TODO: Do something with the data here
+                    var data = filter.Data;
+                    var dataLength = filter.Data.Length;
+                    //NOTE: You may need to use a different encoding depending on the request
+                    var dataAsUtf8String = Encoding.UTF8.GetString(data);
+                }
+            }
+        }
     }
 
     public class AppendResponseFilter : IResponseFilter

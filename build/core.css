@@ -17,11 +17,21 @@
 
 /*////////////////////////////////////*/
 
-button,
+/*header#gb,
+div.feedback-link,
+div.gp-footer {
+    display: none;
+}
+
+.frame {
+    height: 100vh;
+}*/
+
+/*button,
 input[type="text"],
 input[type="submit"],
 input[type="button"],
 textarea,
 ins {
     display: none !important;
-}
+}*/

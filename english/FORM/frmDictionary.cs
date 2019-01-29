@@ -136,7 +136,7 @@ namespace English
                 //}
 
                 ////Only called for our customScheme
-                var dataFilter = new DictionaryMemoryStreamResponseFilter();
+                var dataFilter = new DictionaryMemoryStreamResponseFilter(this.Parent);
                 responseDictionary.Add(request.Identifier, dataFilter);
                 return dataFilter;
 
@@ -264,6 +264,9 @@ namespace English
     /// </summary>
     public class DictionaryMemoryStreamResponseFilter : IResponseFilter
     {
+        readonly IForm Parent;
+        public DictionaryMemoryStreamResponseFilter(IForm parent) : base() { this.Parent = parent; }
+
         private MemoryStream memoryStream;
 
         bool IResponseFilter.InitFilter()
@@ -305,8 +308,10 @@ namespace English
 
             var dataAsUtf8String = Encoding.UTF8.GetString(readBytes);
             if (dataAsUtf8String.EndsWith("</html>")) {
-                ;
-                var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
+                string textHook = System.Environment.NewLine + "<!-- CefSharp Appended this comment. -->" +
+                    this.Parent.Context.CoreCSS + this.Parent.Context.CoreJS;
+                //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
+                var bufs = Encoding.UTF8.GetBytes(textHook);
                 dataOutWritten = dataInRead + bufs.Length;
                 dataOut.Write(bufs, 0, bufs.Length);
 

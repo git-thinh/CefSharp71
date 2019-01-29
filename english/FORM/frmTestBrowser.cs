@@ -19,7 +19,8 @@ namespace English
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
-        const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
+        //const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
+        const string URL = "localfolder://cefsharp/home.html";
         //const string URL = "https://www.eslfast.com/";
         //const string URL = "https://dictionary.cambridge.org/";
         //const string URL = "https://youtube.com";

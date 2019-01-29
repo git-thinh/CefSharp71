@@ -12,6 +12,7 @@ using System.Web.Hosting;
 using CefSharp;
 using English.Properties;
 using CefSharp.WinForms;
+using CefSharp.SchemeHandler;
 
 namespace English
 {
@@ -206,6 +207,19 @@ namespace English
             //////                                                        hostName: "cefsharp", //Optional param no hostname checking if null
             //////                                                        defaultPage: "home.html") //Optional param will default to index.html
             //////});
+
+            //string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //var dir = System.IO.Path.GetDirectoryName(path);
+            //string pathWWW = Path.Combine(dir, "test");
+            string pathWWW = "test";
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = "localfolder",
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: pathWWW,
+                                                                    schemeName: "localfolder", //Optional param no schemename checking if null
+                                                                    hostName: "cefsharp", //Optional param no hostname checking if null
+                                                                    defaultPage: "home.html") //Optional param will default to index.html
+            });
 
             //settings.RegisterExtension(new V8Extension("english", Resources.extension));
 

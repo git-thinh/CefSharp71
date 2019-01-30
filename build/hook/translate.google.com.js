@@ -133,7 +133,7 @@ var APP_INFO = { Width: $(window).width() };
 function f_english_Translate() {
     if (_SELECT_OBJ != null) {
         var otran = JSON.parse(JSON.stringify(_SELECT_OBJ));
-        f_log('TRANSLATE ', otran);
+        console.log('TRANSLATE ', otran);
         var text = otran.text.toLowerCase().trim();
 
         //___API.speechWord(text, 1);
@@ -158,7 +158,7 @@ function f_english_Translate() {
         ////if (_.some(_words, function (w) { return w == text; }) == false) _words.push(text);
 
         ////f_post('//api/translate/v1', otran.text, function (_res) {
-        ////    f_log('OK', _res);
+        ////    console.log('OK', _res);
         ////    if (_res && _res.length > 0) {
         ////        otran.mean_vi = _res;
         ////        f_english_TranslateShowResult(otran);
@@ -166,7 +166,7 @@ function f_english_Translate() {
 
         ////    }
         ////}, function (_err) {
-        ////    f_log('ERR', _err);
+        ////    console.log('ERR', _err);
         ////})
     }
 }
@@ -215,7 +215,7 @@ function f_event_processCenter(event) {
             break;
     }
 
-    //f_log(tagName + '.' + type + ': ' + JSON.stringify(_SELECT_OBJ));
+    //console.log(tagName + '.' + type + ': ' + JSON.stringify(_SELECT_OBJ));
 
     if (_SELECT_OBJ != null) {
         if (_SELECT_OBJ.cached == true) {
@@ -229,7 +229,7 @@ function f_event_processCenter(event) {
         }
     }
 
-    //f_log(tagName + '.' + type + ': ' + id + ' \r\nSELECT= ' + textSelect + ' \r\nTEXT= ', text);
+    //console.log(tagName + '.' + type + ': ' + id + ' \r\nSELECT= ' + textSelect + ' \r\nTEXT= ', text);
     //event.preventDefault();
     //event.stopPropagation();
 }
@@ -277,12 +277,12 @@ var ___SCREENS_COMMON_MIXIN = {},
             f_base_show: function () {
                 var el = document.getElementById(this.el_id);
                 if (el) el.style.opacity = 1;
-                f_log(this.el_id, 'SHOW');
+                console.log(this.el_id, 'SHOW');
             },
             f_base_hide: function () {
                 var el = document.getElementById(this.el_id);
                 if (el) el.style.opacity = 0;
-                f_log(this.el_id, 'HIDE');
+                console.log(this.el_id, 'HIDE');
             },
             screenEmit: function (screenId) {
                 var _self = this;
@@ -331,7 +331,7 @@ var ___SCREENS_COMMON_MIXIN = {},
             getDataTextSynchronous: function (url) {
                 //if (url.indexOf('/') != 0) url = '/' + url;
                 //if (url.indexOf('http') != 0) url = 'http://' + ___NODEJS_HOST + url;
-                //f_log_kit(url);
+                //console.log_kit(url);
                 var r = new XMLHttpRequest();
                 r.open('GET', url, false);
                 r.send(null);
@@ -458,25 +458,25 @@ Vue.component('com-nav-bottom', {
     },
     beforeDestroy: function () {
         var _self = this;
-        f_log(_self.code + ':: beforeDestroy');
+        console.log(_self.code + ':: beforeDestroy');
         if (w2ui[_self.uc_toolbar_name]) w2ui[_self.uc_toolbar_name].destroy();
     },
     destroyed: function () {
         var _self = this;
-        f_log(_self.code + ':: destroyed');
+        console.log(_self.code + ':: destroyed');
     },
     beforeCompile: function () {
         var _self = this;
-        f_log(_self.code + ':: beforeCompile');
+        console.log(_self.code + ':: beforeCompile');
         this.f_base_hide();
     },
     compiled: function () {
         var _self = this;
-        f_log(_self.code + ':: compiled');
+        console.log(_self.code + ':: compiled');
     },
     ready: function () {
         var _self = this;
-        f_log(_self.code + ':: ready');
+        console.log(_self.code + ':: ready');
 
         _self.f_toolbar_init();
 
@@ -635,25 +635,25 @@ Vue.component('com-dictionary', {
     },
     beforeDestroy: function () {
         var _self = this;
-        f_log(_self.code + ':: beforeDestroy');
+        console.log(_self.code + ':: beforeDestroy');
         _self.freeResource();
     },
     destroyed: function () {
         var _self = this;
-        f_log(_self.code + ':: destroyed');
+        console.log(_self.code + ':: destroyed');
     },
     beforeCompile: function () {
         var _self = this;
-        f_log(_self.code + ':: beforeCompile');
+        console.log(_self.code + ':: beforeCompile');
         this.f_base_hide();
     },
     compiled: function () {
         var _self = this;
-        f_log(_self.code + ':: compiled');
+        console.log(_self.code + ':: compiled');
     },
     ready: function () {
         var _self = this;
-        f_log(_self.code + ':: ready');
+        console.log(_self.code + ':: ready');
         _self.setup();
     },
     methods: {

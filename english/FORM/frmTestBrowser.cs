@@ -19,7 +19,8 @@ namespace English
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
-        const string URL = "https://translate.google.com/#view=home&op=translate&sl=en&tl=vi";
+        const string URL = "https://gitter.im/";
+        //const string URL = "https://translate.google.com/#view=home&op=translate&sl=en&tl=vi";
         //const string URL = "file:///G:/_EL/Document/forME/Vietnamese/Cau_truc_tieng_anh_The_Windy.pdf";
         //const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
         //const string URL = "localfolder://cefsharp/home.html";

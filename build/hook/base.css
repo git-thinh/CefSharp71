@@ -1,10 +1,10 @@
 
 ::-webkit-scrollbar {
-    width: 9px;
+    width: 7px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: #000;
 }
 
 ::-webkit-scrollbar-track-piece:start {
@@ -17,15 +17,7 @@
 
 /*////////////////////////////////////*/
 
-/*header#gb,
-div.feedback-link,
-div.gp-footer {
-    display: none;
-}
 
-.frame {
-    height: 100vh;
-}*/
 
 /*button,
 input[type="text"],

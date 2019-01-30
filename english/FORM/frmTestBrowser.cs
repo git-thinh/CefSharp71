@@ -19,11 +19,14 @@ namespace English
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
+        const string URL = "https://translate.google.com/#view=home&op=translate&sl=en&tl=vi";
+        //const string URL = "file:///G:/_EL/Document/forME/Vietnamese/Cau_truc_tieng_anh_The_Windy.pdf";
         //const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
         //const string URL = "localfolder://cefsharp/home.html";
         //const string URL = "http://hook/base.js";
         //const string URL = "https://www.eslfast.com/";
-        const string URL = "https://dictionary.cambridge.org/";
+        //const string URL = "https://dictionary.cambridge.org/";
+        //const string URL = "https://youtube.com";
         //const string URL = "https://youtube.com";
         readonly StringBuilder LogBuilder;
         public frmTestBrowser(IContext context) : base(context)
@@ -41,7 +44,8 @@ namespace English
                 this.Top = 0;
                 this.Left = 0;
                 this.Width = 1030;// Screen.PrimaryScreen.WorkingArea.Width / 2;
-                this.Height = 610;// Screen.PrimaryScreen.WorkingArea.Height;
+                //this.Height = 610; 
+                this.Height = Screen.PrimaryScreen.WorkingArea.Height;
 
                 Browser.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
                 BackColor = Color.Black;
@@ -51,7 +55,8 @@ namespace English
             {
                 Location = new System.Drawing.Point(3, 7),
                 Width = 1024,
-                Height = 600,
+                //Height = 600,
+                Height = Screen.PrimaryScreen.WorkingArea.Height - 10,
                 Dock = DockStyle.None,
                 BrowserSettings =
                 {
@@ -75,6 +80,9 @@ namespace English
             {
                 LogBuilder.AppendLine(Environment.NewLine);
                 LogBuilder.AppendLine(url);
+
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine(url);
             };
             browser.ResourceHandlerFactory = requestResource;
             browser.LifeSpanHandler = new BrowserLifeSpanHandler();
@@ -82,6 +90,13 @@ namespace English
             this.Browser = browser;
 
 
+        }
+
+        public string URL_NEXT { get; set; }
+        public void Go(string url)
+        {
+            Browser.Stop();
+            Browser.Load(url);
         }
 
         ~frmTestBrowser()
@@ -122,6 +137,20 @@ namespace English
         public override bool OnBeforeBrowse(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect)
         {
             this.Parent.ClearLog();
+
+            if (frame.IsMain)
+            {
+                this.Parent.URL_NEXT = request.Url;
+                Console.Clear();
+                //if (string.IsNullOrEmpty(request.ReferrerUrl))
+                //    return false;
+                //else
+                //{
+                //    this.Parent.Go(request.Url);
+                //    return true;
+                //}
+            }
+
             return false;
         }
 
@@ -130,8 +159,11 @@ namespace English
         public override IResponseFilter GetResourceResponseFilter(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
         {
             var url = request.Url;
-            if (url == browserControl.Address)
+            if (url == this.Parent.URL_NEXT)
             {
+                Console.WriteLine(Environment.NewLine + "###################>: " + request.Url);
+
+
                 //if (request.Url.Equals(CefExample.ResponseFilterTestUrl, StringComparison.OrdinalIgnoreCase))
                 //{
                 //    return new FindReplaceResponseFilter("REPLACE_THIS_STRING", "This is the replaced string!");
@@ -143,7 +175,7 @@ namespace English
                 //}
 
                 ////Only called for our customScheme
-                var dataFilter = new MemoryStreamResponseFilter();
+                var dataFilter = new MemoryStreamResponseFilter(this.Parent);
                 responseDictionary.Add(request.Identifier, dataFilter);
                 return dataFilter;
 
@@ -271,6 +303,9 @@ namespace English
     /// </summary>
     public class MemoryStreamResponseFilter : IResponseFilter
     {
+        readonly IForm Parent;
+        public MemoryStreamResponseFilter(IForm parent) : base() { this.Parent = parent; }
+
         private MemoryStream memoryStream;
 
         bool IResponseFilter.InitFilter()
@@ -313,12 +348,17 @@ namespace English
             var dataAsUtf8String = Encoding.UTF8.GetString(readBytes).TrimEnd();
             if (dataAsUtf8String.EndsWith("</html>"))
             {
-                string textHook = @"<link href=""http://hook/base.css"" rel=""stylesheet""/><script src=""http://hook/base.js""></script>";
+                Uri uri = new Uri(this.Parent.URL_NEXT);
+                string host = uri.Host.ToLower();
+                if (host.StartsWith("www.")) host = host.Substring(4);
+
+                string textHook = @"<link href=""http://hook/base.css"" rel=""stylesheet""/><script src=""http://hook/base.js""></script>" +
+                                    @"<link href=""http://hook/"+host+ @".css"" rel=""stylesheet""/><script src=""http://hook/" + host + @".js""></script>";
+                
                 //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
                 var bufs = Encoding.UTF8.GetBytes(textHook);
                 dataOutWritten = dataInRead + bufs.Length;
                 dataOut.Write(bufs, 0, bufs.Length);
-
             }
 
             return FilterStatus.Done;

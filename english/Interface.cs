@@ -11,6 +11,9 @@ namespace English
         void RaiseEventMenuBrowser(int menuCode);
         void CloseForm();
         void ClearLog();
+
+        string URL_NEXT { get; set; }
+        void Go(string url);
     }
 
     public interface IContext

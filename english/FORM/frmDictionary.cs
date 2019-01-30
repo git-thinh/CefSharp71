@@ -77,6 +77,13 @@ namespace English
 
         }
 
+        public string URL_NEXT { get; set; }
+        public void Go(string url)
+        {
+            Browser.Stop();
+            Browser.Load(url);
+        }
+
         ~frmDictionary()
         {
             this.Browser.Dispose();

@@ -1,0 +1,9 @@
+﻿header#gb,
+div.feedback-link,
+div.gp-footer {
+    display: none;
+}
+
+.frame {
+    height: 100vh;
+}

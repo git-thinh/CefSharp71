@@ -70,7 +70,7 @@ namespace English
             };
             browser.IsBrowserInitializedChanged += (se, ev) =>
             {
-                //browser.ShowDevTools();
+                browser.ShowDevTools();
             };
             browser.RequestHandler = new RequestHandler(this);
             browser.MenuHandler = new MenuHandler(this);
@@ -335,6 +335,21 @@ namespace English
             dataIn.Read(readBytes, 0, readBytes.Length);
             dataOut.Write(readBytes, 0, readBytes.Length);
 
+            //////var dataBody = Encoding.UTF8.GetString(readBytes).TrimEnd();
+            //////if (dataBody.Contains("<html"))
+            //////{                
+            //////    var bufHok = Encoding.ASCII.GetBytes("<div id='hok___'/>");
+            //////    List<byte> ls = new List<byte>(bufHok.Length + readBytes.Length);
+            //////    ls.AddRange(bufHok);
+            //////    ls.AddRange(readBytes);
+
+            //////    dataOut.Write(ls.ToArray(), 0, ls.ToArray().Length);
+            //////    dataOutWritten = dataInRead + bufHok.Length;
+            //////}
+            //////else {
+            //////    dataOut.Write(readBytes, 0, readBytes.Length);
+            //////}
+
             //Write buffer to the memory stream
             memoryStream.Write(readBytes, 0, readBytes.Length);
 
@@ -352,7 +367,7 @@ namespace English
                 string host = uri.Host.ToLower();
                 if (host.StartsWith("www.")) host = host.Substring(4);
 
-                string textHook = @"<link href=""http://f/w.css?" + host + @""" rel=stylesheet><script src=""http://f/w.js?" + host + @"""></script>";
+                string textHook = @"<link href=http://f/w.css?" + host + @" rel=stylesheet><script src=http://f/w.js?" + host + @"></script>";
 
                 //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
                 var bufs = Encoding.ASCII.GetBytes(textHook);
@@ -526,3 +541,4 @@ namespace English
         }
     }
 }
+

@@ -226,8 +226,9 @@ namespace English
             ////});
 
             if (Directory.Exists("hook") == false) Directory.CreateDirectory("hook");
-            if (File.Exists("hook/base.js") == false) File.WriteAllText("hook/base.js", string.Empty);
-            if (File.Exists("hook/base.css") == false) File.WriteAllText("hook/base.css", string.Empty);
+            if (Directory.Exists("hook/base") == false) Directory.CreateDirectory("hook/base");
+            if (File.Exists("hook/base/www.js") == false) File.WriteAllText("hook/base/www.js", string.Empty);
+            if (File.Exists("hook/base/www.css") == false) File.WriteAllText("hook/base/www.css", string.Empty);
             ////settings.RegisterScheme(new CefCustomScheme
             ////{
             ////    SchemeName = "http",

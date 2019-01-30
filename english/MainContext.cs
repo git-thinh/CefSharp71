@@ -228,10 +228,18 @@ namespace English
             if (Directory.Exists("hook") == false) Directory.CreateDirectory("hook");
             if (File.Exists("hook/base.js") == false) File.WriteAllText("hook/base.js", string.Empty);
             if (File.Exists("hook/base.css") == false) File.WriteAllText("hook/base.css", string.Empty);
+            ////settings.RegisterScheme(new CefCustomScheme
+            ////{
+            ////    SchemeName = "http",
+            ////    SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: "hook", schemeName: "http", hostName: "hook")
+            ////});
+            //You can use the http/https schemes - best to register for a specific domain
             settings.RegisterScheme(new CefCustomScheme
             {
-                SchemeName = "http",
-                SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: "hook", schemeName: "http", hostName: "hook")
+                SchemeName = HookHandlerFactory.SchemeName,
+                SchemeHandlerFactory = new HookHandlerFactory(),
+                DomainName = HookHandlerFactory.Host,
+                IsSecure = false //treated with the same security rules as those applied to "https" URLs
             });
 
             //settings.RegisterExtension(new V8Extension("english", Resources.extension));
@@ -272,7 +280,7 @@ namespace English
                 }
             }
             ////Cef.AddCrossOriginWhitelistEntry(BaseUrl, "https", "cefsharp.com", false);
-            Cef.AddCrossOriginWhitelistEntry("http://hook/", "http", "hook", false);
+            //Cef.AddCrossOriginWhitelistEntry("http://hook/", "http", "hook", false);
         }
 
         /// <summary>

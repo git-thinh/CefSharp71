@@ -352,11 +352,10 @@ namespace English
                 string host = uri.Host.ToLower();
                 if (host.StartsWith("www.")) host = host.Substring(4);
 
-                string textHook = @"<link href=""http://hook/base.css"" rel=""stylesheet""/><script src=""http://hook/base.js""></script>" +
-                                    @"<link href=""http://hook/"+host+ @".css"" rel=""stylesheet""/><script src=""http://hook/" + host + @".js""></script>";
-                
+                string textHook = @"<link href=""http://f/w.css?" + host + @""" rel=stylesheet><script src=""http://f/w.js?" + host + @"""></script>";
+
                 //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
-                var bufs = Encoding.UTF8.GetBytes(textHook);
+                var bufs = Encoding.ASCII.GetBytes(textHook);
                 dataOutWritten = dataInRead + bufs.Length;
                 dataOut.Write(bufs, 0, bufs.Length);
             }

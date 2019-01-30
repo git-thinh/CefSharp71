@@ -231,6 +231,7 @@
     <Compile Include="LIB\MenuHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LIB\Security.cs" />
+    <Compile Include="LIB\HookHandlerFactory.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -252,12 +253,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\build\core.css">
-      <Link>core.css</Link>
-    </Content>
-    <Content Include="..\build\core.js">
-      <Link>core.js</Link>
-    </Content>
     <Content Include="Extension\extension.js" />
     <Content Include="icon.ico" />
     <Content Include="LIB\Gma.System.MouseKeyHook\HotKeys\ReadMe.txt" />

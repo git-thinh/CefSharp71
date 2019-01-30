@@ -156,13 +156,13 @@ namespace CefSharp.Example
             //////}
             settings.BrowserSubprocessPath = "cefclient.exe";
 
-            //////settings.RegisterScheme(new CefCustomScheme
-            //////{
-            //////    SchemeName = CefSharpSchemeHandlerFactory.SchemeName,
-            //////    SchemeHandlerFactory = new CefSharpSchemeHandlerFactory(),
-            //////    IsSecure = true //treated with the same security rules as those applied to "https" URLs
-            //////    //SchemeHandlerFactory = new InMemorySchemeAndResourceHandlerFactory()
-            //////});
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = CefSharpSchemeHandlerFactory.SchemeName,
+                SchemeHandlerFactory = new CefSharpSchemeHandlerFactory(),
+                IsSecure = true //treated with the same security rules as those applied to "https" URLs
+                //SchemeHandlerFactory = new InMemorySchemeAndResourceHandlerFactory()
+            });
 
             //////settings.RegisterScheme(new CefCustomScheme
             //////{

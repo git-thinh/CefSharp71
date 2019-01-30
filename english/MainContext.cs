@@ -77,6 +77,10 @@ namespace English
             //The location where cache data will be stored on disk. If empty an in-memory cache will be used for some features and a temporary disk cache for others.
             //HTML5 databases such as localStorage will only persist across sessions if a cache path is specified. 
             settings.CachePath = "cache";
+
+            //settings.CachePath = null;
+            //settings.CefCommandLineArgs.Add("disable-application-cache", "1");
+
             //settings.UserAgent = "CefSharp Browser" + Cef.CefSharpVersion; // Example User Agent
             //settings.CefCommandLineArgs.Add("renderer-process-limit", "1");
             //settings.CefCommandLineArgs.Add("renderer-startup-dialog", "1");
@@ -208,17 +212,26 @@ namespace English
             //////                                                        defaultPage: "home.html") //Optional param will default to index.html
             //////});
 
-            //string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //var dir = System.IO.Path.GetDirectoryName(path);
-            //string pathWWW = Path.Combine(dir, "test");
-            string pathWWW = "test";
+            //////string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //////var dir = System.IO.Path.GetDirectoryName(path);
+            //////string pathWWW = Path.Combine(dir, "test");
+            ////string pathWWW = "test";
+            ////settings.RegisterScheme(new CefCustomScheme
+            ////{
+            ////    SchemeName = "localfolder",
+            ////    SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: pathWWW,
+            ////                                                        schemeName: "localfolder", //Optional param no schemename checking if null
+            ////                                                        hostName: "cefsharp", //Optional param no hostname checking if null
+            ////                                                        defaultPage: "home.html") //Optional param will default to index.html
+            ////});
+
+            if (Directory.Exists("hook") == false) Directory.CreateDirectory("hook");
+            if (File.Exists("hook/base.js") == false) File.WriteAllText("hook/base.js", string.Empty);
+            if (File.Exists("hook/base.css") == false) File.WriteAllText("hook/base.css", string.Empty);
             settings.RegisterScheme(new CefCustomScheme
             {
-                SchemeName = "localfolder",
-                SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: pathWWW,
-                                                                    schemeName: "localfolder", //Optional param no schemename checking if null
-                                                                    hostName: "cefsharp", //Optional param no hostname checking if null
-                                                                    defaultPage: "home.html") //Optional param will default to index.html
+                SchemeName = "http",
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: "hook", schemeName: "http", hostName: "hook")
             });
 
             //settings.RegisterExtension(new V8Extension("english", Resources.extension));
@@ -259,6 +272,7 @@ namespace English
                 }
             }
             ////Cef.AddCrossOriginWhitelistEntry(BaseUrl, "https", "cefsharp.com", false);
+            Cef.AddCrossOriginWhitelistEntry("http://hook/", "http", "hook", false);
         }
 
         /// <summary>
@@ -272,7 +286,12 @@ namespace English
 
             setupIcon();
 
-            new frmTestBrowser(this).Show();
+            var f = new frmTestBrowser(this);
+            f.FormClosing += (se, ev) => { 
+                ev.Cancel = true;
+                ExitThreadCore();
+            };
+            f.Show();
 
             _dictionary = new frmDictionary(this);
             _dictionary.FormClosing += (se, ev) =>
@@ -304,7 +323,7 @@ namespace English
             _timerRefresh.Start();
         }
 
-        protected override void ExitThreadCore()
+        public void freeResource()
         {
             _mainIcon.Visible = false;
             _mainIcon.Dispose();
@@ -313,9 +332,11 @@ namespace English
             _timerRefresh.Dispose();
 
             ProxyWebServer.Stop();
+        }
 
-            Cef.Shutdown();
-
+        protected override void ExitThreadCore()
+        {
+            freeResource();
             base.ExitThreadCore();
         }
 

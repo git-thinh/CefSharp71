@@ -13,6 +13,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{88C04564-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooTranslate", "..\GooTranslate\GooTranslate\GooTranslate.csproj", "{52F1E73B-EAA5-4BDB-912D-A13C0350CB62}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "hook", "build\hook\", "{0BDF3609-2FA6-444B-94F6-E91803B89EC1}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_29141"
+		Debug.AspNetCompiler.PhysicalPath = "build\hook\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_29141\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_29141"
+		Release.AspNetCompiler.PhysicalPath = "build\hook\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_29141\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "29141"
+		SlnRelativePath = "build\hook\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +90,18 @@ Global
 		{52F1E73B-EAA5-4BDB-912D-A13C0350CB62}.Release|x64.Build.0 = Release|Any CPU
 		{52F1E73B-EAA5-4BDB-912D-A13C0350CB62}.Release|x86.ActiveCfg = Release|x86
 		{52F1E73B-EAA5-4BDB-912D-A13C0350CB62}.Release|x86.Build.0 = Release|x86
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Debug|x64.Build.0 = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Release|x64.ActiveCfg = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Release|x64.Build.0 = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Release|x86.ActiveCfg = Debug|Any CPU
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +110,7 @@ Global
 		{A4394E7B-1155-43A6-989E-8AB72DDDC9E4} = {88C04564-1D72-4033-A70F-3C645CE8E749}
 		{254BD050-4850-424D-B107-D1EA24F35879} = {88C04564-1D72-4033-A70F-3C645CE8E749}
 		{52F1E73B-EAA5-4BDB-912D-A13C0350CB62} = {88C04564-1D72-4033-A70F-3C645CE8E749}
+		{0BDF3609-2FA6-444B-94F6-E91803B89EC1} = {88C04564-1D72-4033-A70F-3C645CE8E749}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {498A1983-7AA3-4B31-AA87-78A5060FDF61}

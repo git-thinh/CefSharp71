@@ -20,15 +20,17 @@ namespace English
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
         //const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
-        const string URL = "localfolder://cefsharp/home.html";
+        //const string URL = "localfolder://cefsharp/home.html";
+        //const string URL = "http://hook/base.js";
         //const string URL = "https://www.eslfast.com/";
-        //const string URL = "https://dictionary.cambridge.org/";
+        const string URL = "https://dictionary.cambridge.org/";
         //const string URL = "https://youtube.com";
         readonly StringBuilder LogBuilder;
         public frmTestBrowser(IContext context) : base(context)
         {
             LogBuilder = new StringBuilder();
             this.Text = "";
+
 
             //Only perform layout when control has completly finished resizing
             ResizeBegin += (s, e) => SuspendLayout();
@@ -57,12 +59,13 @@ namespace English
                     WebGl = CefState.Disabled,
                     WebSecurity = CefState.Disabled,
                     FileAccessFromFileUrls = CefState.Enabled,
-                    UniversalAccessFromFileUrls = CefState.Enabled
+                    UniversalAccessFromFileUrls = CefState.Enabled,
+                    //ApplicationCache = CefState.Disabled
                 }
             };
             browser.IsBrowserInitializedChanged += (se, ev) =>
             {
-                browser.ShowDevTools();
+                //browser.ShowDevTools();
             };
             browser.RequestHandler = new RequestHandler(this);
             browser.MenuHandler = new MenuHandler(this);
@@ -305,6 +308,17 @@ namespace English
             if (dataInRead < dataIn.Length)
             {
                 return FilterStatus.NeedMoreData;
+            }
+
+            var dataAsUtf8String = Encoding.UTF8.GetString(readBytes).TrimEnd();
+            if (dataAsUtf8String.EndsWith("</html>"))
+            {
+                string textHook = @"<link href=""http://hook/base.css"" rel=""stylesheet""/><script src=""http://hook/base.js""></script>";
+                //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
+                var bufs = Encoding.UTF8.GetBytes(textHook);
+                dataOutWritten = dataInRead + bufs.Length;
+                dataOut.Write(bufs, 0, bufs.Length);
+
             }
 
             return FilterStatus.Done;

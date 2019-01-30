@@ -24,6 +24,7 @@ namespace English
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new MainContext());
+                    CefSharp.Cef.Shutdown();
                 }
                 finally
                 {

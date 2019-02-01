@@ -2,12 +2,11 @@
 using System.Linq;
 using System.Windows.Forms;
 using System.IO;
-using Fleck;
-using System.Web.Hosting;
 using CefSharp;
 using CefSharp.WinForms;
+using System.Web.Hosting;
 
-namespace English
+namespace browser
 {
     public class MainContext : ApplicationContext, IContext
     {
@@ -24,9 +23,9 @@ namespace English
         bool _connectivityIssues = false;
         int _connectCheckCounter = 0;
 
-        readonly frmBrowser _browser;
-        readonly frmDictionary _dictionary;
-        readonly frmMediaPlayer _player;
+        //readonly frmBrowser _browser;
+        //readonly frmDictionary _dictionary;
+        //readonly frmMediaPlayer _player;
 
         #endregion
 
@@ -295,30 +294,30 @@ namespace English
             };
             f.Show();
 
-            _dictionary = new frmDictionary(this);
-            _dictionary.FormClosing += (se, ev) =>
-            {
-                _dictionary.Hide();
-                ev.Cancel = true;
-                //??????????????????????????????????
-                this.ExitThreadCore();
-            };
-            //_dictionary.Show();
+            //_dictionary = new frmDictionary(this);
+            //_dictionary.FormClosing += (se, ev) =>
+            //{
+            //    _dictionary.Hide();
+            //    ev.Cancel = true;
+            //    //??????????????????????????????????
+            //    this.ExitThreadCore();
+            //};
+            ////_dictionary.Show();
 
-            _player = new frmMediaPlayer();
-            _player.FormClosing += (se, ev) =>
-            {
-                _player.Hide();
-                ev.Cancel = true;
-            };
+            //_player = new frmMediaPlayer();
+            //_player.FormClosing += (se, ev) =>
+            //{
+            //    _player.Hide();
+            //    ev.Cancel = true;
+            //};
 
-            _browser = new frmBrowser();
-            _browser.FormClosing += (se, ev) =>
-            {
-                _browser.Hide();
-                ev.Cancel = true;
-            };
-            //_browser.Show();
+            //_browser = new frmBrowser();
+            //_browser.FormClosing += (se, ev) =>
+            //{
+            //    _browser.Hide();
+            //    ev.Cancel = true;
+            //};
+            ////_browser.Show();
 
             _timerRefresh.Tick += tm_refresh_Tick;
             tm_refresh_Tick(_timerRefresh, new EventArgs()); //Fire the first event
@@ -333,7 +332,7 @@ namespace English
             _timerRefresh.Stop();
             _timerRefresh.Dispose();
 
-            ProxyWebServer.Stop();
+            //ProxyWebServer.Stop();
         }
 
         protected override void ExitThreadCore()
@@ -346,13 +345,13 @@ namespace English
 
         void websocket_Init()
         {
-            var server = new WebSocketServer("ws://0.0.0.0:8181");
-            server.Start(socket =>
-            {
-                socket.OnOpen = () => Console.WriteLine("Open!");
-                socket.OnClose = () => Console.WriteLine("Close!");
-                socket.OnMessage = message => socket.Send(message);
-            });
+            //var server = new WebSocketServer("ws://0.0.0.0:8181");
+            //server.Start(socket =>
+            //{
+            //    socket.OnOpen = () => Console.WriteLine("Open!");
+            //    socket.OnClose = () => Console.WriteLine("Close!");
+            //    socket.OnMessage = message => socket.Send(message);
+            //});
         }
 
         #endregion
@@ -361,17 +360,17 @@ namespace English
 
         private void onOpenBrowserClicked(object sender, EventArgs e)
         {
-            _browser.Show();
+            //_browser.Show();
         }
 
         private void onOpenDictionaryClicked(object sender, EventArgs e)
         {
-            _dictionary.Show();
+            //_dictionary.Show();
         }
 
         private void onOpenMediaPlayerClicked(object sender, EventArgs e)
         {
-            _player.Show();
+            //_player.Show();
         }
 
         private void Main_icon_BalloonTipClicked(object sender, EventArgs e)
@@ -385,7 +384,7 @@ namespace English
         private void setupIcon()
         {
             _mainIcon.Text = "English";
-            _mainIcon.Icon = English.Properties.Resources.icon;
+            //_mainIcon.Icon = English.Properties.Resources.icon;
             _mainIcon.ContextMenu = new ContextMenu();
             _mainIcon.ContextMenu.MenuItems.Add("Browser...", onOpenBrowserClicked);
             _mainIcon.ContextMenu.MenuItems.Add("-");
@@ -427,7 +426,7 @@ namespace English
                 _timerRefresh.Interval = 1000 * 60;
                 if (_connectivityIssues)
                 {
-                    _mainIcon.Icon = English.Properties.Resources.icon;
+                    //_mainIcon.Icon = English.Properties.Resources.icon;
                     _mainIcon.Text = "English\r\nLast Synchronized " + DateTime.Now.ToString("t");
                     Application.DoEvents();
                 }
@@ -436,7 +435,7 @@ namespace English
             else
             {
                 _timerRefresh.Interval = 1000 * 5;
-                _mainIcon.Icon = English.Properties.Resources.offline;
+                //_mainIcon.Icon = English.Properties.Resources.offline;
                 _mainIcon.Text = "English\r\nNo Internet Connection";
                 _connectivityIssues = true;
                 Application.DoEvents();

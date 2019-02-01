@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace English
+namespace browser
 {
     public class frmTestBrowser : frmBase, IForm
     {
@@ -142,7 +142,7 @@ namespace English
             if (frame.IsMain)
             {
                 this.Parent.URL_NEXT = request.Url;
-                Console.Clear();
+                //Console.Clear();
                 //if (string.IsNullOrEmpty(request.ReferrerUrl))
                 //    return false;
                 //else

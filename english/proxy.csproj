@@ -69,6 +69,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Microsoft\System.Net.Http.Formatting.dll</HintPath>
@@ -227,6 +228,25 @@
     <Compile Include="LIB\Microsoft.Owin.StaticFiles\StreamCopyOperation.cs" />
     <Compile Include="LIB\Microsoft.Owin.StaticFiles\____Resources.cs" />
     <Compile Include="LIB\ProxyWebServer.cs" />
+    <Compile Include="LIB\TabStrip\BaseClasses\BaseStyledPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LIB\TabStrip\Control\FATabStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LIB\TabStrip\Control\FATabStripCloseButton.cs" />
+    <Compile Include="LIB\TabStrip\Control\FATabStripItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LIB\TabStrip\Control\FATabStripItemCollection.cs" />
+    <Compile Include="LIB\TabStrip\Control\FATabStripMenuGlyph.cs" />
+    <Compile Include="LIB\TabStrip\Delegates.cs" />
+    <Compile Include="LIB\TabStrip\Design\FATabStripDesigner.cs" />
+    <Compile Include="LIB\TabStrip\Design\FATabStripItemDesigner.cs" />
+    <Compile Include="LIB\TabStrip\Design\ICaptionSupport.cs" />
+    <Compile Include="LIB\TabStrip\Enums.cs" />
+    <Compile Include="LIB\TabStrip\Helpers\CollectionWithEvents.cs" />
+    <Compile Include="LIB\TabStrip\_CONST.cs" />
     <Compile Include="MainContext.cs" />
     <Compile Include="LIB\MenuHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

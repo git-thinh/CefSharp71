@@ -17,3 +17,4 @@ build/debug.log
 build/English.vshost.exe.manifest
 build/request.txt
 /build/GPUCache
+/browser/obj
